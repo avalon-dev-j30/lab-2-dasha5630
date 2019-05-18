@@ -1,7 +1,6 @@
 package ru.avalon.java.j30.labs;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -22,9 +21,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        /*
-         * TODO #01 Подключите к проекту все библиотеки, необходимые для соединения с СУБД.
-         */
+        
         try (Connection connection = getConnection()) {
             ProductCode code = new ProductCode("MO", 'N', "Movies");
             code.save(connection);
@@ -80,10 +77,9 @@ public class Main {
      * @throws SQLException 
      */
     private static Connection getConnection() throws SQLException {
-        /*
-         * TODO #04 Реализуйте метод getConnection
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        String url = "jdbc:derby://localhost:1527/sample";
+        Connection connection = DriverManager.getConnection(url, "app", "app");
+        return connection;
     }
     
 }
