@@ -48,29 +48,17 @@ public class ProductCode {
         /*
          * TODO #05 реализуйте конструктор класса ProductCode
          */
-        
-        ResultSetMetaData meta = set.getMetaData();
-        this.code = code;
-        this.discountCode = discountCode;
-        this.description = description;       
-    }
-    
-    
-     private static void process(ResultSet result) throws SQLException {
-        StringBuilder builder = new StringBuilder();
+
         //получаем данные о полях
-        ResultSetMetaData meta = result.getMetaData();
+        ResultSetMetaData meta = set.getMetaData();
         int colomns = meta.getColumnCount();
         //перебираем ряды
-        while (result.next()){
+        while (set.next()){
             //перебираем значения колонок каждого ряда
-            for (int i = 1; i < colomns + 1; i++) {
-                String value = result.getString(i);
-                builder.append(value).append("\t");
+            for (int i = 1; i < colomns + 1; i =+ 3) {
+                this(set.getString(i), set.getString(i+1).charAt(1), set.getString(i+2));
             }
-            builder.append("\n");
         }
-        System.out.println(builder);
     }
     /**
      * Возвращает код товара
