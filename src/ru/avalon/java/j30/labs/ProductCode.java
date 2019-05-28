@@ -3,6 +3,7 @@ package ru.avalon.java.j30.labs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -43,11 +44,33 @@ public class ProductCode {
      * @param set {@link ResultSet}, полученный в результате запроса, 
      * содержащего все поля таблицы PRODUCT_CODE базы данных Sample.
      */
-    private ProductCode(ResultSet set) {
+    private ProductCode(ResultSet set) throws SQLException {
         /*
          * TODO #05 реализуйте конструктор класса ProductCode
          */
-        throw new UnsupportedOperationException("Not implemented yet!");        
+        
+        ResultSetMetaData meta = set.getMetaData();
+        this.code = code;
+        this.discountCode = discountCode;
+        this.description = description;       
+    }
+    
+    
+     private static void process(ResultSet result) throws SQLException {
+        StringBuilder builder = new StringBuilder();
+        //получаем данные о полях
+        ResultSetMetaData meta = result.getMetaData();
+        int colomns = meta.getColumnCount();
+        //перебираем ряды
+        while (result.next()){
+            //перебираем значения колонок каждого ряда
+            for (int i = 1; i < colomns + 1; i++) {
+                String value = result.getString(i);
+                builder.append(value).append("\t");
+            }
+            builder.append("\n");
+        }
+        System.out.println(builder);
     }
     /**
      * Возвращает код товара
