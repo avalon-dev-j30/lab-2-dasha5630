@@ -49,16 +49,7 @@ public class ProductCode {
          * TODO #05 реализуйте конструктор класса ProductCode
          */
 
-        //получаем данные о полях
-        ResultSetMetaData meta = set.getMetaData();
-        int colomns = meta.getColumnCount();
-        //перебираем ряды
-        while (set.next()){
-            //перебираем значения колонок каждого ряда
-            for (int i = 1; i < colomns + 1; i =+ 3) {
-                this(set.getString(i), set.getString(i+1).charAt(1), set.getString(i+2));
-            }
-        }
+
     }
     /**
      * Возвращает код товара
@@ -116,10 +107,8 @@ public class ProductCode {
      */
     @Override
     public int hashCode() {
-        /*
-         * TODO #06 Реализуйте метод hashCode
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+
+        return code.hashCode() + discountCode + description.hashCode();
     }
     /**
      * Сравнивает некоторый произвольный объект с текущим объектом типа 
@@ -131,10 +120,17 @@ public class ProductCode {
      */
     @Override
     public boolean equals(Object obj) {
-        /*
-         * TODO #07 Реализуйте метод equals
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        
+        if (this.hashCode() == obj.hashCode()) {
+             return true;
+        }
+        else if ( obj instanceof ProductCode){
+            ProductCode o = (ProductCode)obj;
+            if (this.code.equals(o.code) && this.discountCode == o.discountCode && this.description.equals(o.description)) {
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * Возвращает строковое представление кода товара.
@@ -143,10 +139,13 @@ public class ProductCode {
      */
     @Override
     public String toString() {
-        /*
-         * TODO #08 Реализуйте метод toString
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new StringBuilder() 
+                .append(this.code)
+                .append(" ")
+                .append(this.description)
+                .append(" ")
+                .append(this.discountCode)
+                .toString();
     }
     /**
      * Возвращает запрос на выбор всех записей из таблицы PRODUCT_CODE 
@@ -196,10 +195,14 @@ public class ProductCode {
      * @throws SQLException 
      */
     public static Collection<ProductCode> convert(ResultSet set) throws SQLException {
-        /*
-         * TODO #12 Реализуйте метод convert
-         */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        //получаем данные о полях
+        ResultSetMetaData meta = set.getMetaData();
+        int colomns = meta.getColumnCount();
+        //перебираем ряды
+        while (set.next()){
+                (set.getString(1), set.charAt(1), set.getString(i+2));
+            }
+        }
     }
     /**
      * Сохраняет текущий объект в базе данных. 
