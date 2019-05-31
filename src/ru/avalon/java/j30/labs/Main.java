@@ -26,14 +26,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         
         try (Connection connection = getConnection()) {
-            ProductCode code = new ProductCode("MO", 'N', "Movies");
-            
-//             String query = "select * from APP.PRODUCT_CODE";
-//            PreparedStatement statement = connection.prepareStatement(query);
-//          //  statement.setString(1, "%ing%");
-//            ResultSet resultSet = statement.executeQuery();
-//            code.convert(resultSet);
-                    
+            ProductCode code = new ProductCode("MO", 'N', "Movies");                   
             code.save(connection);
             printAllCodes(connection);
 
@@ -41,9 +34,7 @@ public class Main {
             code.save(connection);
             printAllCodes(connection);
         }
-        /*
-         * TODO #14 Средствами отладчика проверьте корректность работы программы
-         */
+
     }
     /**
      * Выводит в кодсоль все коды товаров
