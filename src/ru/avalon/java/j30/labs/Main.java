@@ -27,6 +27,13 @@ public class Main {
         
         try (Connection connection = getConnection()) {
             ProductCode code = new ProductCode("MO", 'N', "Movies");
+            
+//             String query = "select * from APP.PRODUCT_CODE";
+//            PreparedStatement statement = connection.prepareStatement(query);
+//          //  statement.setString(1, "%ing%");
+//            ResultSet resultSet = statement.executeQuery();
+//            code.convert(resultSet);
+                    
             code.save(connection);
             printAllCodes(connection);
 
